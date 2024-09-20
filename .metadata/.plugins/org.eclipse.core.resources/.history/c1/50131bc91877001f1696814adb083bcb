@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DefaultTitle</title>
+</head>
+<body>
+	<%
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	long add_date = sf.parse(request.getParameter("add_date")).getTime();
+	int add_int = Integer.parseInt(request.getParameter("add_int"));
+	String str = request.getParameter("str");
+	%>
+</body>
+</html>

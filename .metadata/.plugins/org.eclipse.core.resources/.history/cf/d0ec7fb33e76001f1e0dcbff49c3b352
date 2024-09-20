@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.colorChange {
+	color: red;
+	font-size: 25px;
+}
+
+.marginTop40{
+	margin-top: 400px;
+}

@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DefaultTitle</title>
+</head>
+<body>
+	<h2>3. 요청 헤더 정보 출력하기</h2>
+	<%
+	// 요청 헤더 이름들을 가져옴
+	Enumeration<String> headers = request.getHeaderNames();
+	%>
+	<ul>
+	<%
+	// 헤더가 있을 때까지 반복
+	while(headers.hasMoreElements()) {
+		String headerName = headers.nextElement(); // 헤더 이름
+		String headerValue = request.getHeader(headerName); // 해당 헤더의 값
+	%>
+		<li><strong><%=headerName %>:</strong> <%=headerValue %></li>
+	<%
+	}
+	%>
+	</ul>
+</body>
+</html>

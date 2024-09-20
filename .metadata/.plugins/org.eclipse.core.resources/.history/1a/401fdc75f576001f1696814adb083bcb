@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DefaultTitle</title>
+</head>
+<body>
+	<h2>1. 클라이언트/서버 환경정보 조회</h2>
+	<a href="request1.jsp?user_id=user1&pwd=1234">GET 방식 전송</a>
+	<br/>
+	
+	<form action="request2.jsp" method="post">
+		<span for="usr_id">아이디 : </span>
+		<input type="text" name="usr_id" id="user_id" value="user2" />
+		<br/>
+		<span for="pwd">비밀번호 : </span>
+		<input type="password" name="pwd" id="pwd" value="1234" />
+		<br/>
+		<input type="submit" value="POST전송" />
+	</form>
+	
+	<h2>2. 클라이언트 요청 매개변수 조회</h2>
+	<form action="request3.jsp" method="post">
+		<span for="usr_id">아이디 : </span>
+		<input type="text" name="usr_id" id="user_id" value="user2" />
+		<br/>
+		<span for="pwd">비밀번호 : </span>
+		<input type="password" name="pwd" id="pwd" value="1234" />
+		<br/>
+		<input type="submit" value="POST전송" />
+	</form>
+</body>
+</html>
