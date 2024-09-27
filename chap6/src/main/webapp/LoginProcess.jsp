@@ -6,7 +6,7 @@
 <%
     String userId = request.getParameter("user_id");
     String userPw = request.getParameter("user_pw");
-    String idSave = request.getParameter("idSave");  // 아이디 저장 체크박스 상태
+    String idSave = request.getParameter("idSave");
 
     String loginErrMsg = null;
 

@@ -94,7 +94,6 @@
         text-decoration: none;
         display: block;
         text-align: center;
-        margin-top: 20px;
     }
 
     a:hover {
@@ -133,6 +132,9 @@
             opacity: 0;
         }
     }
+    button > a {
+    	color: white;
+    }
 </style>
 </head>
 <body>
@@ -140,16 +142,20 @@
         <%
             Random random = new Random();
             for (int i = 0; i < 100; i++) {
-                // 각 drop 요소의 스타일 속성 랜덤 설정
                 double leftPosition = random.nextDouble() * 100;
-                double duration = 1 + random.nextDouble() * 2;  // 1초에서 3초 사이의 지속 시간
-                double delay = random.nextDouble() * 5;  // 0초에서 5초 사이의 지연 시간
+                double duration = 1 + random.nextDouble() * 2;
+                double delay = random.nextDouble() * 5;
         %>
-            <div class="drop" style="left: <%= leftPosition %>vw; animation-duration: <%= duration %>s; animation-delay: <%= delay %>s;"></div>
+            <div class="drop"
+            	 style="left: <%= leftPosition %>vw;
+            	 animation-duration: <%= duration %>s;
+            	 animation-delay: <%= delay %>s;
+            	 ">
+            </div>
         <%
             }
         %>
-    </div> <!-- 비 애니메이션을 추가할 영역 -->
+    </div>
     
     <div class="login-container">
         <h2>로그인 페이지</h2>
@@ -185,7 +191,11 @@
             <input type="submit" value="로그인하기" />
         </form>
         <div class="btnG">
-	        <button onclick="mainPage()" id="backBtn">목록 조회 페이지</button>
+	        <button onclick="mainPage()" id="backBtn"><a href="view.jsp">뷰</a></button>
+        </div>
+        
+        <div class="btnG">
+	        <button onclick="mainPage()" id="backBtn"><a href="CRUD.jsp">CRUD</a></button>
         </div>
 
         <%
@@ -223,10 +233,6 @@
                 pwView.type = "password";
             }
         });
-        
-        const mainBack = () => {
-        	location.assign("../chap5/newMList.jsp");
-        }
     </script>
 </body>
 </html>
