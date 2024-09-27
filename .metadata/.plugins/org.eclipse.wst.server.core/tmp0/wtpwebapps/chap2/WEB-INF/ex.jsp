@@ -8,7 +8,7 @@
 </head>
 <body>
 	<%
-	int sts - response.getStatus();
+	int sts = response.getStatus();
 	
 	if (sts == 400) {
 		out.print("404 에러 발생");

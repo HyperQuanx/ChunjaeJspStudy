@@ -7,8 +7,8 @@
 
     String currentTime = new java.util.Date().toString();
     String eng = "why";
-    String name = "한덕용";
-    String message = "왜 안와";
+    String name = java.net.URLEncoder.encode("한덕용", "UTF-8").replace("+", "%20");  // 공백을 %20으로 변환
+    String message = java.net.URLEncoder.encode("왜 안와", "UTF-8").replace("+", "%20");  // 공백을 %20으로 변환
     Integer num = 18181818;
     String[] items = {"Apple", "Banana", "Cherry"};
 
@@ -38,8 +38,8 @@
     <h2>응답 헤더에 값 추가 완료</h2>
 
     <p>현재 시간: <%= currentTime %></p>
-    <p>사용자 이름: <%= name %></p>
-    <p>Message: <%= message %></p>
+    <p>사용자 이름: <%= java.net.URLDecoder.decode(name, "UTF-8") %></p>  <!-- 디코딩하여 출력 -->
+    <p>Message: <%= java.net.URLDecoder.decode(message, "UTF-8") %></p>  <!-- 디코딩하여 출력 -->
     <p>Items 배열: <%= itemsJson %></p>
 </body>
 </html>

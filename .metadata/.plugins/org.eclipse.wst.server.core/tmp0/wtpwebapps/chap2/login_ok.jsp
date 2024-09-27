@@ -12,10 +12,10 @@
 	String user_id = request.getParameter("user_id");
 	String pwd = request.getParameter("pwd");
 	if (user_id.equals("user1") && pwd.equalsIgnoreCase("1234")){
-		response.sendRedirect("이동할 URL");
+		response.sendRedirect("login_complete.jsp");
 	}
 	else {
-		request.getRequestDispatcher("에러처리URL").forward(request, response);
+		request.getRequestDispatcher("login.jsp?loginErr=1").forward(request, response);
 	}
 	%>
 </body>
