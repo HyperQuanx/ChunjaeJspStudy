@@ -4,12 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
 <title>로그인 페이지</title>
 <style>
     body {
-        font-family: "Hi Melody", sans-serif;
-        font-weight: 400;
-        font-style: normal;
+        font-family: "Dongle", sans-serif;
+ 		font-weight: 400;
+  		font-style: normal;
         background-color: #f0f4f8;
         color: #333;
         display: flex;
