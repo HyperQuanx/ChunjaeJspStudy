@@ -63,7 +63,7 @@
 	    margin-top: 20px;
 	}
 	
-	.button-group a {
+	.button-group a{
 	    text-decoration: none;
 	    color: white;
 	    background-color: #478abc;
@@ -88,7 +88,6 @@
 		padding: 20px;
 	}
 	
-	/* 반응형 디자인 */
 	@media screen and (max-width: 768px) {
 	    .mainTop {
 	        width: 95%;
@@ -106,6 +105,12 @@
 	        font-size: 12px;
 	        padding: 8px 16px;
 	    }
+	    
+	    .cCenter {
+	    		width: 100%;
+	    		display: flex;
+	    		justify-content: center;
+	    }
 }
 	
 </style>
@@ -121,36 +126,45 @@
     	dto = dao.getBoard(idx);
       	if (dto != null) {
     %>
-    <div class="mainTop">
-	    <ul>
-	    	<li><%= dto.getMemberId() %></li>
-	    	<li>조회수 : <%= dto.getReadCnt() %></li>
-	    </ul>
-	    <div class="contentBox">
-	    	<h3>제목</h3>
-	    	<span><%= dto.getTitle() %></span>
-	    	<h3>본문</h3>
-	    	<%= dto.getContent() %>
+	    <div class="cCenter">
+		    <div class="mainTop">
+			    <ul>
+			    	<li><%= dto.getMemberId() %></li>
+			    	<li>조회수 : <%= dto.getReadCnt() %></li>
+			    </ul>
+			    <div class="contentBox">
+			    	<h3>제목</h3>
+			    	<span><%= dto.getTitle() %></span>
+			    	<h3>본문</h3>
+			    	<%= dto.getContent() %>
+			    </div>
+			    <div class="footer">
+			    	작성일 : <%= dto.getRegDate() %>
+			    </div>
+		    </div>
 	    </div>
-	    <div class="footer">
-	    	작성일 : <%= dto.getRegDate() %>
-	    </div>
-    </div>
     
     <div class="button-group">
-    	<button>
-    		<a class="back-btn" href="javascript:history.back()">수정하기</a>
-    	</button>
-    	<button>
-    		<a class="back-btn" href="javascript:history.back()">뒤로 가기</a>
-    	</button>
+    		<a class="back-btn" href="modify_list.jsp?idx=<%= dto.getIdx() %>">수정하기</a>
+    		<a class="back-btn" href="list.jsp">메인으로 돌아가기</a>
+    		<a class="back-btn" href="javascript:void(0);" onclick="confirmDelete(<%= dto.getIdx() %>)">삭제하기</a>
     </div>
     <%
       	}
+      	dao.close();
       } catch(Exception e) {
     	  e.getMessage();
       }
     %>
-	
+	<script>
+		function confirmDelete(idx) {
+		    let result = confirm("정말 삭제하시겠습니까?");
+		    if (result) {
+		        window.location.href = "delete_list_Ok.jsp?idx=" + idx;
+		    } else {
+		        alert("삭제가 취소되었습니다.");
+		    }
+		}
+	</script>
 </body>
 </html>

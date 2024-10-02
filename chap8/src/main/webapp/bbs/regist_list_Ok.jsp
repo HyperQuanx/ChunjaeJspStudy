@@ -19,6 +19,7 @@
     try {
     	BbsDAO dao = new BbsDAO();
     	dto = dao.createBoard(memberId, title, content);
+        dao.close();
         message = "글 등록 성공 ^_^ ♨";
     } catch(Exception e) {
         message = "글 등록 실패 ↙↙ ㅠ_ㅠ ↘↘ : " + e.getMessage();

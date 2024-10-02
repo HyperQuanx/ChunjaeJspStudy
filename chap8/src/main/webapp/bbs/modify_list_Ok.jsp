@@ -1,33 +1,35 @@
-<%@page import="fullstack7.member.MemberDTO"%>
-<%@page import="fullstack7.member.MemberDAO"%>
+<%@page import="net.fullstack7.bbs.BbsDAO"%>
+<%@page import="net.fullstack7.bbs.BbsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DefaultTitle</title>
+<title>글 수정</title>
 </head>
 <body>
 <%
-    String memberId = request.getParameter("id");
-    String name = request.getParameter("name");
-    String pwd = request.getParameter("pwd");
-    String birth = request.getParameter("birth");
+    String memberId = request.getParameter("memberId");
+    String title = request.getParameter("title");
+    String content = request.getParameter("content");
+    String idx = request.getParameter("idx");
     String message = "";
+    BbsDTO dto = null;
 
     try {
-        MemberDAO dao = new MemberDAO();
-        MemberDTO dto = dao.setMemberRegist(memberId, name, pwd, birth);
-        message = "성공 ㅠ";
+    	BbsDAO dao = new BbsDAO();
+    	dto = dao.modifyBoard(memberId, title, content);
+        dao.close();
+        message = "글 수정 성공 ^_^ ♨";
     } catch(Exception e) {
-        message = "실패 ㅠ : " + e.getMessage();
+        message = "글 등록 실패 ↙↙ ㅠ_ㅠ ↘↘ : " + e.getMessage();
     }
 %>
     <script>
         alert("<%= message %>");
-        <% if ("성공 ㅠ".equals(message)) { %>
-            window.location.href = "LoginForm.jsp";
+        <% if ("글 수정 성공 ^_^ ♨".equals(message)) { %>
+            window.location.href = "view_list.jsp?idx=<%= idx %>";
         <% } %>
     </script>
 </body>

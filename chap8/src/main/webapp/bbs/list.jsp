@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
-<title>로그인 페이지</title>
 <meta charset="UTF-8">
 <title>게시판 목록 조회</title>
 <style>
@@ -131,62 +130,123 @@
 <div>
 
 	<%
-		// 현재 페이지 번호 계산
+		// 페이지 나누는 코드 모음
 		String pageParam = request.getParameter("page");
 		Integer pageNum = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
 		Integer nowPageNum = (pageNum - 1) * 50;
 
-		// BbsDAO를 사용하여 게시판 목록 조회
 		BbsDAO dao = new BbsDAO();
-		List<BbsDTO> boardList = dao.getBoardList(); // 전체 게시판 목록 가져오기
-		int count = boardList.size(); // 총 게시글 수
-		// 페이징을 위한 리스트 슬라이싱
+		List<BbsDTO> boardList = dao.getBoardList();
+		int count = boardList.size();
+		dao.close();
 		List<BbsDTO> paginatedList = boardList.subList(nowPageNum, Math.min(nowPageNum + 50, count));
 	%>
 	
-	<div class="center">
-		<div class="cCenter">
-			<h3>현재 <%= pageNum %> 페이지</h3>
+	<div class="mainBox">
+		<div class="center">
+			<div class="cCenter">
+				<h3>현재 <%= pageNum %> 페이지</h3>
+			</div>
+			<div class="cCenter">
+				<h2>게시판 목록 조회</h2>
+			</div>
 		</div>
-		<div class="cCenter">
-			<h2>게시판 목록 조회</h2>
-		</div>
+		<table>
+			<thead>
+				<tr>
+					<th colspan="2">글제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+				for (BbsDTO board : paginatedList) {
+				%>
+				<tr>
+					<td><%= board.getIdx() %></td>
+					<td><a href="view_list.jsp?idx=<%= board.getIdx() %>"><%= board.getTitle() %></a></td>
+					<td><%= board.getMemberId() %></td>
+					<td><%= board.getRegDate() %></td>
+					<td><%= board.getReadCnt() %></td>
+				</tr>
+				<%
+				}
+				%>	
+				<tr>
+					<td colspan="5" style="text-align: center">
+						<div id="pageArr"></div>
+					</td>
+				</tr>
+				<tr id="footerBar">
+				    <td colspan="5">
+				        <input type="button" id="btnRegist" value="글쓰기"/>
+				        <form id="searchForm" action="search_list.jsp" method="post">
+				        	<input type="hidden" id="searchType" name="searchType" value="memberId" />
+				            <input type="text" id="searchInput" name="memberId" value="" />
+				            
+				            <select id="select1" name="searchType">
+				                <option value="memberId">아이디 검색</option>
+				                <option value="title">제목 검색</option>
+				                <option value="content">본문 검색</option>
+				            </select>
+				            
+				            <input type="submit" value="검색" />
+				        </form>
+				    </td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-	<table>
-		<thead>
-			<tr>
-				<th colspan="2">글제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-			for (BbsDTO board : paginatedList) {
-			%>
-			<tr>
-				<td><%= board.getIdx() %></td>
-				<td><a href="view_list.jsp?idx=<%= board.getIdx() %>"><%= board.getTitle() %></a></td>
-				<td><%= board.getMemberId() %></td>
-				<td><%= board.getRegDate() %></td>
-				<td><%= board.getReadCnt() %></td>
-			</tr>
-			<%
-			}
-			%>	
-			<tr>
-				<td colspan="5" style="text-align: center">
-					<div id="pageArr"></div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="5">
-					<input type="button" id="btnRegist" value="글쓰기"/>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	
+	
+	
+	<div class="searchBox">
+		<div class="center">
+			<div class="cCenter">
+				<h3>현재 <%= pageNum %> 페이지</h3>
+			</div>
+			<div class="cCenter">
+				<h2>게시판 검색</h2>
+			</div>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th colspan="2">글제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+				for (BbsDTO search : paginatedList) {
+				%>
+				<tr>
+					<td><%= search.getIdx() %></td>
+					<td><a href="view_list.jsp?idx=<%= search.getIdx() %>"><%= search.getTitle() %></a></td>
+					<td><%= search.getMemberId() %></td>
+					<td><%= search.getRegDate() %></td>
+					<td><%= search.getReadCnt() %></td>
+				</tr>
+				<%
+				}
+				%>	
+				<tr>
+					<td colspan="5" style="text-align: center">
+						<div id="pageArr"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="5">
+						<a href="list.jsp?page=1">메인으로 돌아가기</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	
 	<script>
 		const btnRegist = document.querySelector("#btnRegist");
@@ -209,6 +269,37 @@
 		if (nowPage) {
 			nowPage.style.color = "#478abc";
 		}
+		
+		
+		document.getElementById('select1').addEventListener('change', function() {
+	        updateSearchInput();
+	    });
+
+	    function updateSearchInput() {
+	        let selectedValue = document.getElementById('select1').value;
+
+	        let searchInput = document.getElementById('searchInput');
+	        searchInput.name = selectedValue;
+	    }
+	    
+	    document.getElementById('select1').addEventListener('change', function() {
+	        updateSearchType();
+	    });
+
+	    function updateSearchType() {
+	        var selectedValue = document.getElementById('select1').value;
+
+	        document.getElementById('searchType').value = selectedValue;
+	    }
+	    
+	    
+	    // 검색이랑 메인 하나로 합치기
+	    let search = false;
+	    
+	    let searchValue = () => {
+	    	search = !search;
+	    	
+	    }
 	</script>
 </div>
 </body>
