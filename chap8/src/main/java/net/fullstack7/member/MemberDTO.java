@@ -3,7 +3,6 @@ package net.fullstack7.member;
 import java.time.LocalDateTime;
 
 public class MemberDTO {
-	// DTO : 프로세스간의 데이터를 주고 받을 때 사용
 	private String memberId;
 	private String name;
 	private String pwd;

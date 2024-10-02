@@ -2,17 +2,18 @@ package net.fullstack7.member;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import net.fullstack7.common.DBConnPool;
 
-public class MemberDAO {
-    // DBConnPool을 이용한 연결
-    private DBConnPool dbConnPool;
 
+public class MemberDAO extends DBConnPool {
     public MemberDAO() {
-        dbConnPool = new DBConnPool(); // DBConnPool 객체 생성
+        super();
     }
 
     /**
@@ -21,17 +22,17 @@ public class MemberDAO {
      * @param pwd String
      * @return MemberDTO
      */
+    
     public MemberDTO getMemberInfo(String user_id, String pwd) {
-        MemberDTO dto = null;  // 리턴을 했으니 null 넣어주기
+        MemberDTO dto = null;
         String query = "SELECT memberId, name, pwd FROM tbl_member WHERE memberId = ? AND pwd = ?";
 
         try {
-            PreparedStatement pstmt = dbConnPool.con.prepareStatement(query);
+            PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, user_id);
             pstmt.setString(2, pwd);
             ResultSet rs = pstmt.executeQuery();
 
-            // 조회된 결과가 있으면 DTO에 데이터를 저장
             if (rs.next()) {
                 dto = new MemberDTO();
                 dto.setMemberId(rs.getString("memberId"));
@@ -40,10 +41,8 @@ public class MemberDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            dbConnPool.close();  // 자원 해제
         }
-
+        
         return dto;
     }
 
@@ -52,7 +51,7 @@ public class MemberDAO {
         String query = "SELECT * FROM tbl_member";
 
         try {
-            PreparedStatement pstmt = dbConnPool.con.prepareStatement(query);
+            PreparedStatement pstmt = con.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -75,23 +74,24 @@ public class MemberDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            dbConnPool.close();  // 자원 해제
         }
-
+        
         return memberList;
     }
-
-    public MemberDTO setMemberRegist(String memberId, String name, String pwd, String birthday) {
+    
+    public MemberDTO setMemberRegist(String memberId, String name, String pwd, String jumin, String addr1, String addr2, String birthday) {
         MemberDTO dto = null;
-        String query = "INSERT INTO tbl_member (memberId, name, pwd, birthday) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_member (memberId, name, pwd, jumin, addr1, addr2, birthday) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            PreparedStatement pstmt = dbConnPool.con.prepareStatement(query);
+            PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, memberId);
             pstmt.setString(2, name);
             pstmt.setString(3, pwd);
-            pstmt.setString(4, birthday);
+            pstmt.setString(4, jumin);
+            pstmt.setString(5, addr1);
+            pstmt.setString(6, addr2);
+            pstmt.setString(7, birthday);
 
             int rs = pstmt.executeUpdate();
 
@@ -100,24 +100,25 @@ public class MemberDAO {
                 dto.setMemberId(memberId);
                 dto.setName(name);
                 dto.setPwd(pwd);
+                dto.setPwd(jumin);
+                dto.setPwd(addr1);
+                dto.setPwd(addr2);
                 dto.setBirthday(birthday);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            dbConnPool.close();  // 자원 해제
         }
 
         return dto;
     }
 
     public MemberDTO getMember(String memberId) {
-        MemberDTO dto = new MemberDTO();
+    	MemberDTO dto = new MemberDTO();
         String query = "SELECT memberId, name, pwd, birthday FROM tbl_member WHERE memberId = ?";
 
         try {
-            PreparedStatement pstmt = dbConnPool.con.prepareStatement(query);
+            PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, memberId);
             ResultSet rs = pstmt.executeQuery();
 
@@ -129,8 +130,6 @@ public class MemberDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            dbConnPool.close();  // 자원 해제
         }
 
         return dto;
@@ -141,7 +140,7 @@ public class MemberDAO {
         String query = "UPDATE tbl_member SET name = ?,  pwd = ?, birthday = ? WHERE memberId = ?";
 
         try {
-            PreparedStatement pstmt = dbConnPool.con.prepareStatement(query);
+            PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, name);
             pstmt.setString(2, pwd);
             pstmt.setString(3, birthday);
@@ -159,29 +158,26 @@ public class MemberDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            dbConnPool.close();  // 자원 해제
         }
 
         return dto;
     }
 
+
     public MemberDTO setMemberDelete(String memberId) {
-        String query = "DELETE FROM tbl_member WHERE memberId = ?";
+    	String query = "DELETE FROM tbl_member WHERE memberId = ?";
         MemberDTO dto = new MemberDTO();
 
         try {
-            PreparedStatement pstmt = dbConnPool.con.prepareStatement(query);
+            PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, memberId);
-            int rs = pstmt.executeUpdate();
+            ResultSet rs = pstmt.executeQuery();
 
-            if (rs > 0) {
-                dto.setMemberId(memberId);
+            if (rs.next()) {
+                dto.setMemberId(rs.getString("memberId"));
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            dbConnPool.close();  // 자원 해제
         }
 
         return dto;

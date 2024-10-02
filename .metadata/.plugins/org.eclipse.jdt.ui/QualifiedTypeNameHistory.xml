@@ -11,10 +11,11 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="fullstack7.common.JDBConnect"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="net.fullstack7.common.DBConnPool"/>
     <fullyQualifiedTypeName name="net.fullstack7.utils.CommonDateUtil"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="net.fullstack7.common.DBConnPool"/>
+    <fullyQualifiedTypeName name="net.fullstack7.member.MemberDAO"/>
 </qualifiedTypeNameHistroy>

@@ -124,6 +124,17 @@
 		font-size: 20px;
 		font-weight: bold;
 	}
+	.loginButton {
+		text-align: right;
+		margin-top: 20px;
+		margin-right: 30px;
+	}
+	.loginButton > button {
+		font-size: 30px;
+		background-color: #478abc;
+		color: white;
+		border-radius: 10px;
+	}
 </style>
 </head>
 <body>
@@ -143,6 +154,9 @@
 	%>
 	
 	<div class="mainBox">
+		<div class="loginButton">		
+			<button onclick="loginGo()">Sign In</button>
+		</div>
 		<div class="center">
 			<div class="cCenter">
 				<h3>현재 <%= pageNum %> 페이지</h3>
@@ -200,54 +214,6 @@
 		</table>
 	</div>
 	
-	
-	
-	<div class="searchBox">
-		<div class="center">
-			<div class="cCenter">
-				<h3>현재 <%= pageNum %> 페이지</h3>
-			</div>
-			<div class="cCenter">
-				<h2>게시판 검색</h2>
-			</div>
-		</div>
-		<table>
-			<thead>
-				<tr>
-					<th colspan="2">글제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				for (BbsDTO search : paginatedList) {
-				%>
-				<tr>
-					<td><%= search.getIdx() %></td>
-					<td><a href="view_list.jsp?idx=<%= search.getIdx() %>"><%= search.getTitle() %></a></td>
-					<td><%= search.getMemberId() %></td>
-					<td><%= search.getRegDate() %></td>
-					<td><%= search.getReadCnt() %></td>
-				</tr>
-				<%
-				}
-				%>	
-				<tr>
-					<td colspan="5" style="text-align: center">
-						<div id="pageArr"></div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="5">
-						<a href="list.jsp?page=1">메인으로 돌아가기</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
 	<script>
 		const btnRegist = document.querySelector("#btnRegist");
 		btnRegist.addEventListener("click", () => {
@@ -292,13 +258,8 @@
 	        document.getElementById('searchType').value = selectedValue;
 	    }
 	    
-	    
-	    // 검색이랑 메인 하나로 합치기
-	    let search = false;
-	    
-	    let searchValue = () => {
-	    	search = !search;
-	    	
+	    const loginGo = () => {
+			location.href="signIn.jsp";
 	    }
 	</script>
 </div>
