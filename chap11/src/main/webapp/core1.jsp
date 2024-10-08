@@ -11,7 +11,7 @@
 <body>
 
 <c:set var="num1" value="10" />
-<c:set var="num2" value="${ num1 mod 5 } }" />
+<c:set var="num2" value="${ num1 mod 5 }" />
 <c:set var="date1" value="<%= new Date() %>" />
 <c:set var="str1">문자열 값 지정</c:set>
 <%!

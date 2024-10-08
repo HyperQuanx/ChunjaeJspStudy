@@ -8,7 +8,7 @@
 <body>
     <!-- 변수 선언 -->
     <c:set var="directVar" value="100" />
-    <c:set var="elVar" value="${ directVar mod 5}" />
+    <c:set var="elVar" value="${ directVar mod 3}" />
     <c:set var="expVar" value="<%= new Date() %>" />
     <c:set var="betweenVar">변수값 요렇게 설정</c:set>
 

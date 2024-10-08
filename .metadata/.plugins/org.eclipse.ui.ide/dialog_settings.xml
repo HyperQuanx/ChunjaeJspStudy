@@ -14,6 +14,15 @@
 		</section>
 	</section>
 	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="true"/>
+		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\java7\JSP\chap10\src\main\webapp"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="D:\java7\JSP\MustHaveJSPv2-main.zip"/>
+		</list>
 		<section name="ExternalProjectImportWizard.dialogBounds">
 			<item key="DIALOG_X_ORIGIN" value="706"/>
 			<item key="DIALOG_Y_ORIGIN" value="211"/>
