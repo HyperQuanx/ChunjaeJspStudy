@@ -7,25 +7,49 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Servlet implementation class ListController
  */
-@WebServlet("/list.do") // list.do 요청을 처리
+// @WebServlet("/ListController2")
 public class ListController2 extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final int PAGE_SIZE = 10;
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // 데이터 처리 로직 (필요시)
-        // 예를 들어, 게시글 목록을 DB에서 가져와 request에 설정할 수 있습니다.
-        // List<BbsDTO> list = bbsDAO.getBbsList();
-        // req.setAttribute("list", list);
+        BbsDAO dao = new BbsDAO();
+        BbsDAO dao2 = new BbsDAO();
 
-        // list.jsp로 포워드
-        req.getRequestDispatcher("/bbs/list.jsp").forward(req, res);
+        // 1. 페이지 번호 파라미터 가져오기 (기본값: 1)
+        String pageParam = req.getParameter("page");
+        int currentPage = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
+        
+        System.err.println("--------------------------------1번--------------------------------");
+        
+        // 2. 전체 게시글 수 가져오기
+        int totalBoardCount = dao.getBoardCount(); // 전체 게시글 수 가져오기
+        
+        System.err.println("--------------------------------2번--------------------------------");
+        
+        // 3. 현재 페이지에 해당하는 게시글 목록 가져오기
+        List<BbsDTO> list = dao2.getBoardList(currentPage, PAGE_SIZE);
+
+        System.err.println("--------------------------------3번--------------------------------");
+        
+        // 4. 전체 페이지 수 계산
+        int totalPages = (int) Math.ceil((double) totalBoardCount / PAGE_SIZE);
+
+        // 5. JSP에 데이터 전달
+        req.setAttribute("list", list);
+        req.setAttribute("totalPages", totalPages);
+        req.setAttribute("currentPage", currentPage);
+        req.setAttribute("totalBoardCount", totalBoardCount);
+
+        req.getRequestDispatcher("/WEB-INF/bbs/list.jsp").forward(req, res);
     }
 
     /**

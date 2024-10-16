@@ -75,6 +75,11 @@ public class JDBConnect {
 			System.out.println("===================================================");
 		}
 	}
+	
+	public Connection getConnection() {
+        return con;
+    }
+	
 	// 연결 해제(리소스 자원 반납)
 	public void close() {
 		try {

@@ -22,7 +22,7 @@ public class BbsDAO extends DBConnPool {
      * @return MemberDTO
      */
     public List<BbsDTO> getBoardList() {
-        List<BbsDTO> boardList = new ArrayList<>();
+        List<BbsDTO> boardList = new ArrayList<BbsDTO>();
         String query = "SELECT * FROM tbl_bbs";
 
         try {

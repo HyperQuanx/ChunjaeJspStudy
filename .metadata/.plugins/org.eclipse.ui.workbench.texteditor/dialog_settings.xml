@@ -8,21 +8,28 @@
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="forEach"/>
+		<item key="selection" value="sign"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="sign"/>
+			<item value="UserDatabase"/>
+			<item value="partHeader"/>
+			<item value="part"/>
+			<item value="maria"/>
+			<item value="8080"/>
+			<item value="saved"/>
+			<item value="idsave"/>
+			<item value="&lt;c:set var=&quot;iTag&quot;&gt;"/>
 			<item value="foreach"/>
 			<item value="for"/>
 			<item value="pwV"/>
 			<item value="getMemberInfo"/>
 			<item value="get"/>
 			<item value="btnDelete"/>
-			<item value="btnRegist"/>
-			<item value="editable"/>
 		</list>
 		<list key="replacehistory">
 		</list>

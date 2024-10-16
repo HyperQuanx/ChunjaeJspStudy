@@ -8,8 +8,8 @@
 </head>
 <body>
     <script>
-    function requestAction(frm, met) {
-        if (met == 1) {
+    const requestAction = (frm, type) => {
+        if (type == 1) {
             frm.method = 'get';
         }
         else {

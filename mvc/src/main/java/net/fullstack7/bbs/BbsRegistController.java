@@ -21,6 +21,7 @@ import java.util.Map;
 		maxFileSize = 1024*1024*1,
 		maxRequestSize = 1024*1024*10
 )
+
 public class BbsRegistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,10 +29,7 @@ public class BbsRegistController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		req.getRequestDispatcher("/bbs/regist.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/bbs/regist.jsp").forward(req, res);
 	}
 
 	/**
@@ -82,11 +80,12 @@ public class BbsRegistController extends HttpServlet {
 	    
 	    // 등록 성공
 	    if (rtnResult > 0) {
-	        res.sendRedirect("/bbs/list.do"); // list.jsp가 아닌 list.do로 리다이렉트
+	        req.setAttribute("successMsg", "게시글이 성공적으로 등록되었습니다.");
+	        req.setAttribute("uri", "./list.do");
+	        req.getRequestDispatcher("/WEB-INF/alert.jsp").forward(req, res);
 	    } else {
-	        // 오류 처리
-	        req.setAttribute("errMsg", "게시글 등록 시 에러가 발생");
-	        req.getRequestDispatcher("/bbs/regist.jsp").forward(req, res);
+	        req.setAttribute("errMsg", "게시글 등록 시 에러가 발생했습니다.");
+	        req.getRequestDispatcher("/WEB-INF/bbs/regist.jsp").forward(req, res);
 	    }
 
 	}
