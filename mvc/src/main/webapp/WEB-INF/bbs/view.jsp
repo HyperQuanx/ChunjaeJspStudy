@@ -127,9 +127,9 @@
 		<h2>게시글 상세</h2>
 
 	    <%
-	    BbsDTO dto = (BbsDTO) request.getAttribute("vL"); 
+	    BbsDTO dto = (BbsDTO) request.getAttribute("vL");
+	    String filePath1 = dto.getFilePath();
 	    %>
-	
 	    <div class="cCenter">
 			<div class="mainTop">
 				<div>
@@ -138,7 +138,7 @@
 					<p>제목 : <%= dto.getTitle() %></p>
 					<div>
 					    콘텐츠 : <%= dto.getContent() %>
-					    <img src="<%= dto.getFilePath() != null ? request.getContextPath() + "/uploads/" + dto.getFileName() : request.getContextPath() + "/uploads/defaultImg.png" %>">
+					    <img src="<%= (filePath1 != null) ? request.getContextPath() + "/uploads/" + dto.getFileName() : request.getContextPath() + "/uploads/defaultImg.png" %>">
 					</div>
 					<p>노출일 : <%= dto.getDisplayDate() %></p>
 					<p>등록일 : <%= dto.getRegDate() %></p>

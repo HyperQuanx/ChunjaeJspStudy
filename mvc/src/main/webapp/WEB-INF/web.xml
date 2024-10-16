@@ -41,4 +41,41 @@
     <servlet-name>ListController2</servlet-name>
     <url-pattern>/bbs/list.do</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>LoginCheckFilter1</display-name>
+    <filter-name>LoginCheckFilter1</filter-name>
+    <filter-class>net.fullstack7.filters.LoginCheckFilter1</filter-class>
+    <init-param>
+      <description>필터를 초기화 하는 변수 1</description>
+      <param-name>FILTER_INIT_PARAM1</param-name>
+      <param-value>필터 초기화 변수1</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginCheckFilter1</filter-name>
+    <url-pattern>/bbs/regist.do</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>LoginCheckFilter2</display-name>
+    <filter-name>LoginCheckFilter2</filter-name>
+    <filter-class>net.fullstack7.filters.LoginCheckFilter2</filter-class>
+    <init-param>
+      <description>필터를 초기화 하는 변수 2</description>
+      <param-name>FILTER_INIT_PARAM2</param-name>
+      <param-value>필터 초기화 변수2</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginCheckFilter2</filter-name>
+    <url-pattern>/bbs/modify.do</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>net.fullstack7.listeners.ContextListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>net.fullstack7.listeners.SessionListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>net.fullstack7.listeners.SessionAttributesListener</listener-class>
+  </listener>
 </web-app>

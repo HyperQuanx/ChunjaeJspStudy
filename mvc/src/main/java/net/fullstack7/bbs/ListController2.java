@@ -24,21 +24,18 @@ public class ListController2 extends HttpServlet {
         BbsDAO dao = new BbsDAO();
         BbsDAO dao2 = new BbsDAO();
 
-        // 1. 페이지 번호 파라미터 가져오기 (기본값: 1)
+        // 1. 페이지 번호 파라미터 가져오기 (기본값: 1로 설정해놀기)
         String pageParam = req.getParameter("page");
         int currentPage = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
         
-        System.err.println("--------------------------------1번--------------------------------");
         
         // 2. 전체 게시글 수 가져오기
         int totalBoardCount = dao.getBoardCount(); // 전체 게시글 수 가져오기
         
-        System.err.println("--------------------------------2번--------------------------------");
         
         // 3. 현재 페이지에 해당하는 게시글 목록 가져오기
         List<BbsDTO> list = dao2.getBoardList(currentPage, PAGE_SIZE);
 
-        System.err.println("--------------------------------3번--------------------------------");
         
         // 4. 전체 페이지 수 계산
         int totalPages = (int) Math.ceil((double) totalBoardCount / PAGE_SIZE);
@@ -49,6 +46,15 @@ public class ListController2 extends HttpServlet {
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("totalBoardCount", totalBoardCount);
 
+        /*
+         * 리스너 실험용
+        if (req.getSession().getAttribute("test") != null) {
+        	req.getSession().setAttribute("test", "test");        	
+        } else {
+        	req.getSession().invalidate();
+        }
+        */
+        
         req.getRequestDispatcher("/WEB-INF/bbs/list.jsp").forward(req, res);
     }
 

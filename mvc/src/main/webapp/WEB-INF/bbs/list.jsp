@@ -153,7 +153,7 @@
 	    console.log(name);
 	    const logBtn = document.querySelector("#logBtn");
 	    const userName = document.querySelector("#userName");
-	
+		
 	    document.querySelector("#registPost").addEventListener("click", (e) => {
 	        if (name == "null") {
 	            e.preventDefault();

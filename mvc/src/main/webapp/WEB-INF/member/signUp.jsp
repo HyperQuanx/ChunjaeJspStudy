@@ -164,7 +164,7 @@
         </form>
         <a href="<c:url value='/pagem.do?ove=mb-login' />">Login</a>
         <a href="https://policy.naver.com/rules/service.html">회원가입 약관</a>
-        <a href="<c:url value='/pagem.do?ove=bbs-list' />">메인페이지로 돌아가기</a>
+        <a href="<%= request.getContextPath() %>/bbs/list.do">메인페이지로 돌아가기</a>
 
         <span id="errMsg">
             <%= request.getAttribute("errorMessage") == null ? "" : request.getAttribute("errorMessage") %>

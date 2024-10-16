@@ -38,6 +38,8 @@ public class LoginController extends HttpServlet {
             if (dto != null) {
             	req.getSession().setAttribute("memberId", id);
             	req.getSession().setAttribute("name", dto.getName());
+            	req.getSession().setMaxInactiveInterval(1800); // 30분 설정해놓기
+            	
             	// 나중에 이것도 메서드로 빼보자
                 req.getRequestDispatcher("/WEB-INF/member/login_ok.jsp").forward(req, res);
             } else {
